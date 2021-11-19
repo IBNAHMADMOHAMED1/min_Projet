@@ -1,154 +1,119 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-// Définition de la structure Salle
-typedef struct Salle {
-	int id;
-	char libelle[20];
-	int capacite;
-} Salle;
-// *************       Fonction qui cree une salle     *****************************************
 
-Salle CreerSalle() {
-	Salle s;
-	printf("Entrer l'' identificateur : ");
-	scanf("%d", &s.id);
-	printf("Entrer le libelle : ");
-	scanf("%s", s.libelle);
-	printf("Entrer la capacite : ");
-	scanf("%d", &s.capacite);
-	return s;
+typedef struct
+{
+    char* nom[20][100];
+    int tele[10];
+}personne;
+
+    personne table[100];
+    char* personne_ajouter[30];
+    int position;
+    char* dab ;
+    char*  d ;
+    int nomber_personne;
+    int i , j ;
+
+void cree_presonne(int nomber_personne);
+void afficher (int nomber_personne);
+
+int main()
+{
+
+
+
+    int Action ;
+     while(1)
+     {
+    printf("Que voulez vous faire : \n");
+    printf("-> Saise le repertoir            (0)\n");
+    printf("-> Ajouterune personne           (1)\n");
+    printf("-> Affichr le repertoir          (2)\n");
+    printf("-> Faire un recherche par nom    (3)\n");
+    printf("-> Retirer un personne par nom   (4)\n");
+    printf("-> Terminer                      (5)\n");
+
+    scanf("%d",&Action);
+   // cree_presonne(table[100],nomber_personne);
+
+    if (Action==0)
+        {
+            printf("Enter nombre des personne :  ");
+            scanf("%d",&nomber_personne);
+            cree_presonne(nomber_personne);
+        }
+    if (Action==1)
+    {
+        ajouterPersonne();
+    }
+
+    if (Action==2) afficher(nomber_personne);
+
+ /*
+    if (Action==3) recherch();
+    if (Action==4) retier();*/
+    if (Action==5) break;
+
+    printf("\n");
+
+     }
+
+
+    return 0;
 }
 
 
-// ********************* onction qui remplit un tableau de salles *******************
+void cree_presonne(int nomber_personne)
+{
+    int i ;
+    for (i=0;i<nomber_personne;i++)
+    {
+        printf("Enter Nom de Presonne %d :  ",i+1);
+        scanf("%s",table->nom);
+        printf("Enter num de Tele de %s :  ",table->nom);
+        scanf("%d",table->tele);
 
-void SaisirInfosSalle(Salle Liste[],int n) {
-	int i;
-	for(i=0; i<n; i++){
-		Liste[i] = CreerSalle();
-	}
+    }
 }
+void afficher (int nomber_personne)
 
-// ********************************** Affichage d'une salle *****************************
-void AfficherSalle(Salle s) {
-	printf("Id Salle : %d; ", s.id);
-	printf("Libelle Salle : %s; ", s.libelle);
-	printf("Capacite Salle : %d\n\n", s.capacite);
+    {
 
-}
-
-// ********************************** Affichage de la liste des salles *************************
-
-void AfficherInfosSalles(Salle Liste[], int n ) {
-	int i;
-	for(i=0; i<n; i++){
-		printf("Salle %d : \n", i+1);
-		AfficherSalle(Liste[i]);
-	}
-}
-
-// ********************************** Recherche d'une salle par ID ******************************
-
-int RechercherSalle(int id, Salle Liste[], int n){
-	int var_Recherch = 0, i;
-	for(i=0; i<n; i++){
-		if(Liste[i].id == id){
-			var_Recherch;
-			break;
-		}
-	}
-	return var_Recherch;
-}
-
-// ********************************** Suppression d'un salle **************************************
-void SupprimerSalle(int id, Salle Liste[], int n){
-	int i, j;
-	if(!RechercherSalle(id, Liste, n)){
-		printf("Salle n''existe pas!\n");
-	}
-	else{
-
-		for(i=0; i<n; i++){
-			if(Liste[i].id == id){
-				for(j=i; j<n-1; j++){
-					Liste[j] = Liste[j+1];
-				}
-
-				n--;
-
-			}
-		}
-		printf("Liste des salles apres suppression de la salle %d : \n", id);
-		AfficherInfosSalles(Liste, n);
-	}
-}
-
-// **************************************Tri de la liste des salles par ordre (Croissant) alphabétique des libelles **********
-
-void TrierSallesParLibelle(Salle Liste[], int n){
-	int i, j;
-	Salle s;
-	for(i=0; i<n; i++){
-		for(j=i;j<n;j++){
-	        if(strcmp(Liste[i].libelle , Liste[j].libelle) == 1)
-			{
-	        	s = Liste[i];
-	           	Liste[i] = Liste[j];
-	           	Liste[j] = s;
-	        }
-    	}
-	}
-	puts("Liste des Salles triees par libelle:");
-	AfficherInfosSalles(Liste, n);
-}
+        for (i=0;i<nomber_personne;i++)
+        {
+            printf("%s | %d \n",table->nom,*table->tele);
+        }
+    }
+void ajouterPersonne()
+{
+           printf("Entrer Le Personne a Ajouter: ");
+           scanf("%s",personne_ajouter);
+           printf("Entrer la position: ");
+           scanf("%d",&position);
 
 
-
-main(){
-	int n, choix, id;
-
-
-	Salle t[30], * a;
+           //printf("--------- %d \n",position);
+         //  printf("--------- %s",table[0].nom[0]);
+          //printf("--------- %s",personne_ajouter);
 
 
-	do{
-//      ************************* Menu **********************
+           dab = table[position].nom;
+          *table[position].nom[position]=personne_ajouter;
 
-		puts("--_-_-_-_-_-_-_-_-_-_-_-Menu-_-_-_-_-_-_-_-_-_-_-_-_-_\n\n");
-		puts("1:	Lire les salles.");
-		puts("2:	Afficher la liste des salles.");
-		puts("3:	Supprimer une salle.");
-		puts("4:	Afficher les salles classées par libelle.");
-		puts("6:	Quitter le programme.");
-		puts("Tapez votre choix :");
-		scanf("%d", &choix);
+        for (i=0;i<nomber_personne+1;i++)
+        {
+                position++;
+               d = table[position].nom;
+             //  table[position].nom=dab;
+               //tab[position]=valeur_ajouter;
+               dab =d ;
+            table[position].tele=08939;
 
-		switch(choix){
-			case 1:
-					printf("Donner le nombre d'articles: ");
-					scanf("%d", &n);
-					SaisirInfosSalle(t, n);
-					break;
-
-			case 2:
-					AfficherInfosSalles(t,n);
-					break;
-			case 3:
-					printf("Entrer l'identificatuer de la salle a supprime: ");
-					scanf("%d", &id);
-					SupprimerSalle(id, t, &n);
-					break;
-			case 4:
-					TrierSallesParLibelle(t,n);
-					break;
-
-			case 5:
-					printf("Fin du programme\n");
-					break;
-			default:
-					printf("Choix invalid!\n");
-
-		}
-	}while(choix != 5);
+        }
+         for (i=0;i<nomber_personne+1;i++)
+        {
+            printf("%s | %d \n",table->nom,*table->tele);
+        }
 }
